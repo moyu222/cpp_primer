@@ -1,0 +1,12 @@
+# 忽略所有编译生成的中间文件和可执行文件
+*.o
+*.obj
+*.exe
+*.out
+*.a
+*.so
+*.dll
+
+# 忽略构建目录（如果你用 CMake 或 Make）
+build/
+bin/
