@@ -6,7 +6,9 @@
 *.a
 *.so
 *.dll
+*.DS_Store
 
 # 忽略构建目录（如果你用 CMake 或 Make）
 build/
 bin/
+.DS_Store
