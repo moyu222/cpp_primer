@@ -5,7 +5,11 @@
 #include <string>
 #include <iostream>
 
+// 前向声明接口函数（确保类内构造函数可以使用）
+class Sales_data;
 std::istream &read(std::istream &, Sales_data &);
+std::ostream &print(std::ostream &, const Sales_data &);
+Sales_data add(const Sales_data &, const Sales_data &);
 
 class Sales_data
 {
@@ -43,10 +47,10 @@ private:
     double revenue = 0.0;
 };
 
-// 非成员接口函数
-Sales_data add(const Sales_data &, const Sales_data &);
-std::ostream &print(std::ostream &, const Sales_data &);
-std::istream &read(std::istream &, Sales_data &);
+// // 非成员接口函数
+// Sales_data add(const Sales_data &, const Sales_data &);
+// std::ostream &print(std::ostream &, const Sales_data &);
+// std::istream &read(std::istream &, Sales_data &);
 
 Sales_data &Sales_data::combine(const Sales_data &rhs)
 {
