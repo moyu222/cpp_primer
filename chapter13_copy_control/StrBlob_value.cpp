@@ -1,5 +1,3 @@
-#ifndef MY_STRBLOB_H
-#define MY_STRBLOB_H
 #include <vector>
 #include <iostream>
 #include <string>
@@ -7,34 +5,44 @@
 #include <memory>
 #include <stdexcept>
 
+using namespace std;
+
 class StrBlobPtr;
 
 class StrBlob
 {
     friend class StrBlobPtr;
 public:
-    typedef std::vector<std::string>::size_type size_type;
+    typedef vector<string>::size_type size_type;
+private:
+    shared_ptr<vector<string>> data;
+    void check(size_type i, const string &msg) const;
+public:
     StrBlob();
-    StrBlob(std::initializer_list<std::string> li);
-    StrBlob(std::vector<std::string> *p);
-    size_type size() const { return data->size(); };
-    bool empty() const { return data->empty(); };
-    void push_back(const std::string &t) { data->emplace_back(t); };
+    StrBlob(const initializer_list<string> il);
+    StrBlob(vector<string> *p); // new vector 初始化
+
+    StrBlob(const StrBlob &s);
+    StrBlob &operator=(const StrBlob &rhs);
+    size_type size() const { return data->size(); }
+    bool empty() const { return data->empty(); }
+
+    void push_back(const string &s) { data->push_back(s); }
     void pop_back();
-    std::string& front();
-    const std::string& front() const;
-    std::string& back();
-    const std::string& back() const;
+
+    string &front();
+    const string &front() const;
+    string &back();
+    const string &back() const;
 
     StrBlobPtr begin();
     StrBlobPtr end();
-
     StrBlobPtr begin() const;
-    StrBlobPtr end() const;
+    StrBlobPtr end() const; // 不要写 const StrBlobPtr begin() const;
+    // 这样迭代器无法改变没有意义,  一般是如下
+    // StrBlobPtr begin();              // 返回可修改迭代器
+    // ConstStrBlobPtr_v begin() const;   // 返回只读迭代器
 
-private:
-    std::shared_ptr<std::vector<std::string>> data;
-    void check(size_type i, const std::string &msg) const;
 };
 
 inline StrBlob::StrBlob() : data(std::make_shared<std::vector<std::string>>()) {}
@@ -43,6 +51,14 @@ inline StrBlob::StrBlob(std::vector<std::string> *p) : data(p) { }
 
 inline StrBlob::StrBlob(std::initializer_list<std::string> li) :
     data(std::make_shared<std::vector<std::string>>(li)) {}
+
+inline StrBlob::StrBlob(const StrBlob &s) : data(make_shared<vector<string>>(*s.data)) { }
+
+inline StrBlob &StrBlob::operator=(const StrBlob &rhs)
+{
+    data = make_shared<vector<string>>(*rhs.data);
+    return *this;
+}
 
 inline void StrBlob::check(size_type i, const std::string& msg) const
 {
@@ -73,6 +89,7 @@ inline std::string& StrBlob::back()
     check(0, "back()");
     return data->back();
 }
+
 inline const std::string& StrBlob::back() const
 {
     check(0, "back()");
@@ -163,5 +180,3 @@ inline bool eq(const StrBlobPtr &lhs, const StrBlobPtr &rhs)
     else
         return false;
 }
-
-#endif //MY_STRBLOB_H
