@@ -107,6 +107,12 @@ public:
         return std::strcmp(lhs.c_str(), rhs.c_str()) < 0;
     }
 
+    friend std::ostream &operator<<(std::ostream &os, const String &s)
+    {
+        os << s.p;
+        return os;
+    }
+
 private:
     std::size_t sz;
     char *p;
