@@ -2,6 +2,7 @@
     "files.associations": {
         "*.cpp": "cpp",
         "cstddef": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "set": "cpp"
     }
 }
